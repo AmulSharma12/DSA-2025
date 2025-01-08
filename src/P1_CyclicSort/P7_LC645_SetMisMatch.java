@@ -10,7 +10,7 @@ public class P7_LC645_SetMisMatch {
 
 
     //Approach 1- using naive solution
-    public static  int[] findErrorNums(int[] nums) {
+    public static  int[] findErrorNums2(int[] nums) {
         int n = nums.length;
         int duplicateElement = -1;
         int missingElement = -1;
@@ -38,7 +38,43 @@ public class P7_LC645_SetMisMatch {
         return new int[] {duplicateElement, missingElement};
     }
 
+    //Approach 2 - using optimised way without extra space
+    public int[] findErrorNums(int[] nums) {
+        int n = nums.length;
+        int duplicateElement = -1;
+        int missingElement = -1;
 
+        //place the element at their correct indexes
+        int index = 0;
+        while(index < n){
+            int correctIndex = nums[index] - 1;
+            if(nums[index] != nums[correctIndex]){
+                swap(nums, index, correctIndex);
+            }
+            else{
+                index++;
+            }
+        }
+
+
+
+        //scanning the element that are in the incorrect position
+        for(int i = 0; i<n; i++){
+            if(i != nums[i]  - 1){
+                duplicateElement = nums[i];
+                missingElement = i + 1;
+            }
+        }
+
+
+        return new int[] {duplicateElement, missingElement};
+    }
+
+    private static void swap(int[] nums, int firstIndex, int secondIndex){
+        int temp = nums[firstIndex];
+        nums[firstIndex] = nums[secondIndex];
+        nums[secondIndex] = temp;
+    }
 
 
 }

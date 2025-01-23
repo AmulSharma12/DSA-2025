@@ -32,4 +32,35 @@ public class P11_LC1283_SmallestDivisorGivenThreshold {
         return divisor;
     }
 
+    //Optimised approach
+    public static int smallestDivisor2(int[] nums, int threshold) {
+        int n = nums.length;
+        int maximum = -1;
+        //getting the maximum element from the array
+        for(int element:nums){
+            maximum = Math.max(element, maximum);
+        }
+        System.out.println(maximum);
+        int lowDivisor = 1;
+        int highDivisor = maximum;
+        System.out.println(maximum);
+        while(lowDivisor < highDivisor){
+            int sum = 0;
+            int midDivisor = lowDivisor + (highDivisor - lowDivisor)/2;
+            for(int element: nums){
+                sum += (int)Math.ceil((double)element/midDivisor);
+            }
+            System.out.println(midDivisor + " " + sum);
+
+            if(sum <= threshold){
+                highDivisor = midDivisor;
+
+            }else{
+                lowDivisor = midDivisor + 1;
+            }
+        }
+
+        return lowDivisor;
+    }
+
 }

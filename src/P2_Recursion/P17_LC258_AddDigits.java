@@ -29,4 +29,13 @@ public class P17_LC258_AddDigits {
 
         return sum;
     }
+
+    //Recursive approach
+    public static int addDigits2(int num) {
+        if(num < 10)    return num;
+        int newNumberGenerated =  sumOfDigit(num);
+        return addDigits(newNumberGenerated);
+    }
+
+
 }
